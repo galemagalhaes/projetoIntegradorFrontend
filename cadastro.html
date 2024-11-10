@@ -2,10 +2,11 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tela Cadastro</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="cadastro.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 </head>
 
 <body>
@@ -13,28 +14,60 @@
         <div class="box-cadastro">
             <div class="card-cadastro">
                 <h1>CADASTRO</h1>
+                <span id="mensagem-erro" class="mensagem-erro"></span>
                 <div class="textfield-cadastro">
-                    <label for="usuario">Usuário</label>
-                    <input type="text" id="usuarioCadastro"name="Usuario" placeholder="Usuario">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nomeCadastro" name="nome" placeholder="Nome" />
+                    <span id="erroNome" class="mensagem-erro"></span>
                 </div>
+
                 <div class="textfield-cadastro">
-                    <label for="senha">Senha</label>
-                    <input type="password" id="senhaCadastro" name="senha" placeholder="Senha">
+                    <label for="email">Email</label>
+                    <input type="email" id="emailCadastro" name="email" placeholder="Email" />
+                    <span id="erroEmail" class="mensagem-erro"></span>
                 </div>
+
                 <div class="textfield-cadastro">
-                    <label for="senha">Digite a senha novamente</label>
-                    <input type="password" id="confirmarSenha" name="senha" placeholder="Repita a senha">
+                    <label for="senha">Digite a senha</label>
+                    <div class="senha-container">
+                        <input type="password" id="senha" name="senha" placeholder="Digite a senha" />
+                        <button type="button" id="mostrarSenha" onclick="toggleSenha('senha', 'mostrarSenha')">
+                            <span class="material-icons" style="color: #f0ffffde; cursor: pointer">visibility</span>
+                        </button>
+                    </div>
+                    <span id="erroSenha" class="mensagem-erro"></span>
                 </div>
-                <button class="btn-login" onclick="validarCadastro();">Cadastrar</button>
+
+                <div class="textfield-cadastro">
+                    <label for="confirmarSenha">Digite a senha novamente</label>
+                    <div class="senha-container">
+                        <input type="password" id="confirmarSenha" name="confirmarSenha"
+                            placeholder="Confirme a senha" />
+                        <button type="button" id="mostrarConfirmarSenha"
+                            onclick="toggleSenha('confirmarSenha', 'mostrarConfirmarSenha')">
+                            <span class="material-icons" style="color: #f0ffffde; cursor: pointer">visibility</span>
+                        </button>
+                    </div>
+                    <span id="erroConfirmarSenha" class="mensagem-erro"></span>
+                </div>
+
+                <div class="container-botoes">
+                    <button id="botaoVoltar" class="btn-cancelar">Cancelar</button>
+                    <button id="botaoCadastro" class="btn-cadastro">Cadastrar</button>
+                </div>
             </div>
         </div>
     </div>
+    <div id="modalSucesso" class="modal">
+        <div class="modal-conteudo">
+            <p>Cadastro realizado com sucesso!</p>
+            🎉
+        </div>
+    </div>
 
-
+    <script type="module" src="cadastro.js"></script>
+    <script src="config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
-<script src="index.js">
-
-
-</script>
 
 </html>

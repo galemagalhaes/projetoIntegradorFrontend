@@ -2,10 +2,10 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Projeto Integrador</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
 <body>
@@ -16,25 +16,30 @@
         <div class="right-login">
             <div class="card-login">
                 <h1>LOGIN</h1>
+                <span id="mensagem-erro" class="mensagem-erro"></span>
+
                 <div class="textfield">
-                    <label for="usuario">Usuário</label>
-                    <input type="text"    id="usuario"  name="Usuario" placeholder="Usuario">
+                    <label for="usuario">E-mail</label>
+                    <input type="text" id="usuario" name="Usuario" placeholder="E-mail" />
+                    <small id="erro-email" class="mensagem-erro"></small>
                 </div>
                 <div class="textfield">
                     <label for="senha">Senha</label>
-                    <input type="password" id = "senha"   name="senha" placeholder="Senha">
+                    <input type="password" id="senha" name="senha" placeholder="Senha" />
+                    <small id="erro-senha" class="mensagem-erro"></small>
                 </div>
+                <span id="mensagem-erro" class="mensagem-erro"></span>
+
                 <p>Ainda não tem uma conta? <a href="cadastro.html">Crie uma.</a></p>
-                <button class="btn-login" onclick="validarLogin()">Login</button>
+                <button id="botao-login" class="btn-login">Login</button>
             </div>
         </div>
     </div>
-
-
 </body>
-<script src="index.js">
-</script>
 
-
+<script type="module" src="index.js"></script>
+<script type="module" src="login.js"></script>
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cabecalho.css" />
+    <link rel="stylesheet" href="dashboard.css" />
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-logo">
+                <h1>Projeto Integrador 2</h1>
+            </div>
+            <ul class="navbar-links">
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/clientes">Clientes</a></li>
+                <li><a href="/vendas">Vendas</a></li>
+            </ul>
+            <button id="logoutButton" class="logout-btn">Deslogar</button>
+        </nav>
+    </header>
+    <main>
+        <h3>Adicionar Nova Venda</h3>
+        <form id="formNovaVenda" class="mb-4">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="clienteVenda">Cliente</label>
+                    <input type="text" class="form-control" id="clienteVenda" required />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="dataVenda">Data da Venda</label>
+                    <input type="date" class="form-control" id="dataVenda" required />
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="valorVenda">Valor Total</label>
+                    <input type="number" class="form-control" id="valorVenda" required />
+                </div>
+            </div>
+            <button type="submit" class="btn">Adicionar Venda</button>
+        </form>
+
+        <h3 class="mt-4">Tabela de Clientes</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nome do Cliente</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Última Compra</th>
+                    <th>Status da Venda</th>
+                    <th>Valor da Última Compra</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaClientes">
+                <tr>
+                    <td>Maria Silva</td>
+                    <td>maria@example.com</td>
+                    <td>(11) 98765-4321</td>
+                    <td>01/09/2024</td>
+                    <td>Pendente</td>
+                    <td>R$ 200</td>
+                </tr>
+                <tr>
+                    <td>João Souza</td>
+                    <td>joao@example.com</td>
+                    <td>(11) 91234-5678</td>
+                    <td>28/08/2024</td>
+                    <td>Concluída</td>
+                    <td>R$ 500</td>
+                </tr>
+                <!-- Adicione mais clientes conforme necessário -->
+            </tbody>
+        </table>
+
+        <h3 class="mt-4">Tabela de Vendas</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID da Venda</th>
+                    <th>Cliente</th>
+                    <th>Data da Venda</th>
+                    <th>Valor Total</th>
+                    <th>Status da Venda</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaVendas">
+                <tr>
+                    <td>#001</td>
+                    <td>Maria Silva</td>
+                    <td>01/09/2024</td>
+                    <td>R$ 200</td>
+                    <td>Pendente</td>
+                </tr>
+                <tr>
+                    <td>#002</td>
+                    <td>João Souza</td>
+                    <td>28/08/2024</td>
+                    <td>R$ 500</td>
+                    <td>Concluída</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="text-center mt-4">
+    </main>
+
+</body>
+
+</html>

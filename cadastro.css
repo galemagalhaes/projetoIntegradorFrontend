@@ -9,7 +9,7 @@ body * {
     box-sizing: border-box;
 }
 
-.main-login {
+.main-cadastro {
     width: 100vw;
     height: 100vh;
     background: #201b2c;
@@ -18,7 +18,7 @@ body * {
     align-items: center;
 }
 
-.left-login {
+.box-cadastro {
     width: 50vw;
     height: 100vh;
     display: flex;
@@ -28,20 +28,9 @@ body * {
     margin-left: 20px;
 }
 
-.left-image {
-    width: 35vw;
-}
-
-.right-login {
-    width: 50vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.card-login {
-    width: 60%;
+.card-cadastro {
+    width: 100%;
+    height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,25 +41,32 @@ body * {
     box-shadow: 0px 10px 40px #00000056;
 }
 
-.card-login>h1 {
+.card-cadastro>h1 {
     color: #00ff88;
     font-weight: 800;
     margin: 0;
 }
 
-.textfield {
+.textfield-cadastro {
     width: 100%;
+    min-height: 110px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
 }
 
-.textfield>input {
+.textfield-cadastro>label {
+    color: #f0ffffde;
+    margin-bottom: 10px;
+}
+
+.textfield-cadastro>input {
     width: 100%;
     border: none;
     border-radius: 8px;
     padding: 15px;
+    margin-bottom: 8px;
     background-color: #514869;
     color: #f0ffffde;
     font-size: 12pt;
@@ -79,19 +75,15 @@ body * {
     box-sizing: border-box;
 }
 
-.textfield>label {
-    color: #f0ffffde;
-    margin-bottom: 10px;
-}
-
-.textfield>input::placeholder {
+.textfield-cadastro>input::placeholder {
     color: #f0ffff94;
 }
 
 .mensagem-erro {
     color: #ff0000;
-    font-size: 16px;
-    margin-top: 5px;
+    font-size: 14px;
+    margin-top: 2px;
+    margin-bottom: 5px;
     display: block;
     height: 16px;
     visibility: hidden;
@@ -101,30 +93,15 @@ body * {
     visibility: visible;
 }
 
-.btn-login {
-    width: 100%;
-    padding: 16px 0px;
-    margin: 25px;
-    border: none;
-    border-radius: 8px;
-    outline: none;
-    text-transform: uppercase;
-    font-weight: 800;
-    letter-spacing: 3px;
-    color: #2b134b;
-    background: #00ff88;
-    cursor: pointer;
-    box-shadow: 0px 10px 40px -12px #00ff8052;
-}
-
 .senha-container {
     display: flex;
     position: relative;
     align-items: center;
     width: 100%;
+    margin-bottom: 8px;
     border-radius: 8px;
     background-color: #514869;
-    box-shadow: 0px 10px 40px #00000056;
+    overflow: hidden;
 }
 
 .senha-container>input {
@@ -144,6 +121,76 @@ body * {
     border: none;
 }
 
+.btn-toggle-senha {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #f0ffffde;
+}
+
+.container-botoes {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.btn-cadastro,
+.btn-cancelar {
+    width: 30%;
+    padding: 16px 0px;
+    margin-top: 16px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: #2b134b;
+    background: #00ff88;
+    cursor: pointer;
+    box-shadow: 0px 10px 40px -12px #00ff8052;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-conteudo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #2f2841;
+    margin: 15% auto;
+    padding: 20px;
+    width: 80%;
+    padding: 16px;
+    gap: 16px;
+    max-width: 400px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-conteudo>p {
+    background: #2f2841;
+    color: #f0ffffde;
+    text-align: center;
+}
+
 input[type="password"]::-ms-reveal,
 input[type="password"]::-webkit-contacts-auto-fill-button {
     display: none;
@@ -153,28 +200,20 @@ input[type="password"]::-webkit-password-input {
     -webkit-appearance: none;
 }
 
-@media only screen and (max-width: 950px) {
-    .card-login {
-        width: 85%;
+@media only screen and (max-width: 1400px) {
+    .card-cadastro {
+        height: 95vh;
     }
 }
 
-@media only screen and (max-width: 600px) {
-    .main-login {
-        flex-direction: column;
+@media only screen and (max-width: 950px) {
+    .card-cadastro {
+        height: 95vh;
     }
+}
 
-    .left-login,
-    .right-login {
-        width: 100%;
-        height: auto;
-    }
-
-    .left-image {
-        width: 60vw;
-    }
-
-    .card-login {
-        width: 90%;
+@media only screen and (max-width: 950px) {
+    .box-cadastro {
+        width: 85%;
     }
 }
