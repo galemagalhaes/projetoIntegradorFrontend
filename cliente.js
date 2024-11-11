@@ -340,7 +340,7 @@ async function validarFormulario() {
         return;
     }
 
-    const cpfCliente = cpfInput.dataset.cpf || cpf;
+    const cpfCliente = cpfInput.dataset.cpf || cpfInput.value;
 
     const dadosCliente = {
         cpf: cpfCliente.replace(/\D/g, ""),
