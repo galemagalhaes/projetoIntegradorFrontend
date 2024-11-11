@@ -153,6 +153,14 @@ input[type="password"]::-webkit-password-input {
     -webkit-appearance: none;
 }
 
+.loading {
+    color: #00ff88;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16px;
+}
+
 @media only screen and (max-width: 950px) {
     .card-login {
         width: 85%;
@@ -177,4 +185,8 @@ input[type="password"]::-webkit-password-input {
     .card-login {
         width: 90%;
     }
+}
+
+.link-cadastro {
+    color: #f0ffffde
 }

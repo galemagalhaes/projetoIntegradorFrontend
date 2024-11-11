@@ -1,15 +1,23 @@
 header {
-    height: 80px;
-    background-color: #2c3e50;
-    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    background-color: #2f2841;
+    padding: 5px 20px;
     color: #ecf0f1;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+h1 {
+    color: #00ff88;
 }
 
 .navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
 }
 
 .container-direita {
@@ -25,20 +33,29 @@ header {
 }
 
 .navbar-links {
+    margin: 0;
     list-style: none;
     display: flex;
     gap: 24px;
 }
 
 .navbar-links a {
-    color: #ecf0f1;
+    color: #00ff88;
     text-decoration: none;
     font-weight: bold;
     font-size: 1em;
+    position: relative;
 }
 
-.navbar-links a:hover {
-    color: #3498db;
+.navbar-links a.ativo {
+    color: #00ff88;
+    border-bottom: 2px solid #00ff88;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.navbar-links a:hover:not(.ativo) {
+    color: #62b68f;
 }
 
 .logout-btn {

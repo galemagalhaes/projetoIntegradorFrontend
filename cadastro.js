@@ -138,10 +138,8 @@ function removerErro(event) {
     campoErro.classList.remove("visivel");
 }
 
-
 document.getElementById("senha").addEventListener("input", validarConfirmarSenha);
 document.getElementById("confirmarSenha").addEventListener("input", validarConfirmarSenha);
-
 
 document.getElementById("nomeCadastro").addEventListener("blur", validarNome);
 document.getElementById("emailCadastro").addEventListener("blur", validarEmail);
@@ -157,7 +155,6 @@ document.getElementById("confirmarSenha").addEventListener("input", function () 
     erroConfirmarSenha.textContent = "";
     erroConfirmarSenha.classList.remove("visivel");
 });
-
 
 document
     .getElementById("mostrarSenha")

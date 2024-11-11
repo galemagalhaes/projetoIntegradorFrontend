@@ -5,9 +5,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard de Vendas</title>
+    <link rel="shortcut icon" type="imagex/png" href="/dash2.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="dashboard.css" />
     <link rel="stylesheet" href="cabecalho.css" />
+    <link rel="stylesheet" href="/scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="loading.css" />
 </head>
 
 <header>
@@ -17,9 +20,9 @@
         </div>
         <div class="container-direita">
             <ul class="navbar-links">
-                <li><a href="/dashboard">Dashboard</a></li>
-                <li><a href="/clientes">Clientes</a></li>
-                <li><a href="/vendas">Vendas</a></li>
+                <li><a href="/dashboard.html" class="ativo">Dashboard</a></li>
+                <li><a href="/cliente.html">Cliente</a></li>
+                <li><a href="/vendas.html">Vendas</a></li>
             </ul>
             <button id="logoutButton" class="logout-btn">Sair</button>
         </div>
@@ -29,50 +32,58 @@
 <body>
     <main class="main-dash">
         <div class="principal">
-            <div class="container mt-5">
+            <div class="container">
                 <h1 class="text-center">Dashboard de Vendas</h1>
-
                 <div class="row my-4">
                     <div class="col-md-3">
                         <div class="card text-center">
-                            <div class="card-body">
-                                <h5>Total de Clientes</h5>
+                            <div class="card-big-numbers">
+                                <h5 class="big-numbers-text">Total de Clientes</h5>
                                 <h2 id="totalClientes">0</h2>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="card text-center">
-                            <div class="card-body">
-                                <h5>Vendas do mês</h5>
+                            <div class="card-big-numbers">
+                                <h5 class="big-numbers-text">Vendas do mês</h5>
                                 <h2 id="totalVendas">0</h2>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="card text-center">
-                            <div class="card-body">
-                                <h5>Receita Total</h5>
+                            <div class="card-big-numbers">
+                                <h5 class="big-numbers-text">Receita Total em R$</h5>
                                 <h2 id="receitaTotal">0</h2>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="card text-center">
-                            <div class="card-body">
-                                <h5>Vendas Pendentes</h5>
+                            <div class="card-big-numbers">
+                                <h5 class="big-numbers-text">Vendas Pendentes</h5>
                                 <h2 id="vendasPendentes">0</h2>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <h3>Gráfico de Vendas por Mês</h3>
                 <div class="row">
                     <div class="col-md-12">
                         <canvas id="vendasPorMes"></canvas>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div id="loading" class="modal">
+            <div class="modal-conteudo">
+                <div class="container-dot">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <p>Carregando ...</p>
             </div>
         </div>
     </main>
@@ -82,6 +93,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="index.js"></script>
     <script type="module" src="dashboard.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script src="cabecalho.js"></script>
     <script src="config.js"></script>
 </body>
 

@@ -41,20 +41,29 @@ document.getElementById("senha").addEventListener("blur", () => {
     }
 });
 
+
 async function validarLogin() {
     const usuario = document.getElementById("usuario");
     const senha = document.getElementById("senha");
     const mensagemErro = document.getElementById("mensagem-erro");
+    const loading = document.getElementById("loading");
+
 
     esconderErro(mensagemErro);
 
+
+    loading.style.display = "block";
+
+
     if (!validarEmail(usuario.value)) {
         exibirErro(mensagemErro, "E-mail inválido.");
+        loading.style.display = "none";
         return;
     }
 
     if (!validarSenha(senha.value)) {
         exibirErro(mensagemErro, "A senha deve ter entre 6 e 8 caracteres.");
+        loading.style.display = "none";
         return;
     }
 
@@ -74,6 +83,8 @@ async function validarLogin() {
         }
     } catch (error) {
         exibirErro(mensagemErro, error.message);
+    } finally {
+        loading.style.display = "none";
     }
 }
 

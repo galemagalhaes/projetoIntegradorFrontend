@@ -2,48 +2,140 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="cabecalho.css" />
-    <link rel="stylesheet" href="dashboard.css" />
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clientes</title>
+    <link rel="shortcut icon" type="imagex/png" href="/dash2.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="cliente.css" />
+    <link rel="stylesheet" type="text/css" href="cabecalho.css" />
+    <link rel="stylesheet" href="/scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="loading.css" />
 </head>
 
-<body>
-    <header>
-        <nav class="navbar">
-            <div class="navbar-logo">
-                <h1>Projeto Integrador 2</h1>
-            </div>
+<header>
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <h1>Projeto Integrador 2</h1>
+        </div>
+        <div class="container-direita">
             <ul class="navbar-links">
-                <li><a href="/dashboard">Dashboard</a></li>
-                <li><a href="/clientes">Clientes</a></li>
-                <li><a href="/vendas">Vendas</a></li>
+                <li><a href="/dashboard.html" class="ativo">Dashboard</a></li>
+                <li><a href="/cliente.html">Cliente</a></li>
+                <li><a href="/vendas.html">Vendas</a></li>
             </ul>
             <button id="logoutButton" class="logout-btn">Sair</button>
-        </nav>
-    </header>
-    <main>
-        <h3 class="mt-4">Adicionar Novo Cliente</h3>
-        <form id="formNovoCliente" class="mb-4">
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="nomeCliente">Nome</label>
-                    <input type="text" class="form-control" id="nomeCliente" required />
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="emailCliente">Email</label>
-                    <input type="email" class="form-control" id="emailCliente" required />
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="telefoneCliente">Telefone</label>
-                    <input type="text" class="form-control" id="telefoneCliente" required />
+        </div>
+    </nav>
+</header>
+
+<body>
+    <main class="main-dash">
+        <div class="principal">
+            <div class="container">
+                <h3 class="mt-2">Adicionar Novo Cliente</h3>
+                <button id="adicionarCliente" class="btn">Adicionar Cliente</button>
+
+                <h3 class="mt-4">Buscar Cliente</h3>
+                <input type="text" id="campoBusca" class="form-control mb-3" placeholder="Buscar por CPF ou Nome" />
+
+                <h3 class="mt-4">Tabela de Clientes</h3>
+
+                <div class="table-container">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>CPF</th>
+                                <th>Nome do Cliente</th>
+                                <th>Email</th>
+                                <th>Telefone</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaClientes"></tbody>
+                    </table>
                 </div>
             </div>
-            <button type="submit" class="btn">Adicionar Cliente</button>
-        </form>
+        </div>
+        <div id="loading" class="modal">
+            <div class="modal-conteudo">
+                <div class="container-dot">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <p>Carregando ...</p>
+            </div>
+        </div>
+        <div id="modal-formulario" class="modal-formulario">
+            <div class="formulario-conteudo">
+                <h3 id="modalTitle" class="mt-4">Adicionar Cliente</h3>
+                <span id="mensagem-erro" class="mensagem-erro"></span>
+                <form id="formNovoCliente" class="formulario">
+                    <div class="form-row mb-4">
+                        <div class="col-md-2">
+                            <label for="cpfCliente">CPF</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="cpfCliente"
+                                placeholder="Digite o CPF (ex: 123.456.789-00)" required />
+                            <span id="erroCpf" class="mensagem-erro"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row mb-4">
+                        <div class="col-md-2">
+                            <label for="nomeCliente">Nome</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="nomeCliente"
+                                placeholder="Digite o nome completo" required />
+                            <span id="erroNome" class="mensagem-erro"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row mb-4">
+                        <div class="col-md-2">
+                            <label for="emailCliente">Email</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="email" class="form-control" id="emailCliente" placeholder="exemplo@dominio.com"
+                                required />
+                            <span id="erroEmail" class="mensagem-erro"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row mb-4">
+                        <div class="col-md-2">
+                            <label for="telefoneCliente">Telefone</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="telefoneCliente" placeholder="(XX) 99999-9999"
+                                required />
+                            <span id="erroTelefone" class="mensagem-erro"></span>
+                        </div>
+                    </div>
+
+                    <div class="container-botoes">
+                        <button type="button" id="fechar-modal" class="btn-cancelar">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="btn-confirmar">Confirmar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </main>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="cliente.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script src="cabecalho.js"></script>
+    <script src="config.js"></script>
 </body>
 
 </html>

@@ -1,19 +1,25 @@
+import { validarToken } from "./auth.js";
 import { obterDashboard } from "./api.js";
 
 async function carregarDashboard() {
+    if (!validarToken()) return;
     try {
+        const loading = document.getElementById("loading");
+        loading.style.display = "block";
         const dados = await obterDashboard();
         document.getElementById("totalClientes").innerText = dados.total_clients;
         document.getElementById("totalVendas").innerText = dados.total_vendas_mes;
         document.getElementById(
             "receitaTotal"
-        ).innerText = `R$ ${dados.receita_mes_atual.toFixed(2)}`;
+        ).innerText = `${dados.receita_mes_atual.toFixed(2)}`;
         document.getElementById("vendasPendentes").innerText =
             dados.total_vendas_pendentes;
 
         inicializarGrafico(dados.grafico);
     } catch (error) {
         console.error("Erro ao carregar o dashboard:", error);
+    } finally {
+        loading.style.display = "none";
     }
 }
 

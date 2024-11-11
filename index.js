@@ -1,4 +1,3 @@
-
 function atualizarDashboard() {
     document.getElementById('totalClientes').innerText = totalClientes;
     document.getElementById('totalVendas').innerText = totalVendas;
@@ -67,6 +66,7 @@ document.getElementById('formNovaVenda').addEventListener('submit', function (ev
     document.getElementById('formNovaVenda').reset();
 });
 
+
 function atualizarCliente(clienteNome, valor, data) {
     const tabelaClientes = document.getElementById('tabelaClientes');
     const linhas = tabelaClientes.getElementsByTagName('tr');
@@ -77,6 +77,7 @@ function atualizarCliente(clienteNome, valor, data) {
         if (tds[0].innerText === clienteNome) {
             tds[3].innerText = data.toLocaleDateString('pt-BR');
             tds[5].innerText = `R$ ${valor.toFixed(2)}`;
+            clienteEncontrado = true;
             break;
         }
     }

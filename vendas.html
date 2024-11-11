@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="cabecalho.css" />
-    <link rel="stylesheet" href="dashboard.css" />
-    <title>Document</title>
+    <link rel="stylesheet" href="/cabecalho.css" />
+    <link rel="stylesheet" href="/scrollbar.css" />
+    <title>Vendas</title>
+    <link rel="shortcut icon" type="imagex/png" href="/dash2.png">
 </head>
 
 <body>
@@ -15,12 +16,14 @@
             <div class="navbar-logo">
                 <h1>Projeto Integrador 2</h1>
             </div>
-            <ul class="navbar-links">
-                <li><a href="/dashboard">Dashboard</a></li>
-                <li><a href="/clientes">Clientes</a></li>
-                <li><a href="/vendas">Vendas</a></li>
-            </ul>
-            <button id="logoutButton" class="logout-btn">Deslogar</button>
+            <div class="container-direita">
+                <ul class="navbar-links">
+                    <li><a href="/dashboard.html" class="ativo">Dashboard</a></li>
+                    <li><a href="/cliente.html">Cliente</a></li>
+                    <li><a href="/vendas.html">Vendas</a></li>
+                </ul>
+                <button id="logoutButton" class="logout-btn">Sair</button>
+            </div>
         </nav>
     </header>
     <main>
@@ -72,7 +75,6 @@
                     <td>Concluída</td>
                     <td>R$ 500</td>
                 </tr>
-                <!-- Adicione mais clientes conforme necessário -->
             </tbody>
         </table>
 

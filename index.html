@@ -4,8 +4,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Projeto Integrador</title>
+    <title>Página de Login</title>
+    <link rel="shortcut icon" type="imagex/png" href="/dash2.png">
     <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" href="/scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="loading.css" />
 </head>
 
 <body>
@@ -30,9 +33,19 @@
                 </div>
                 <span id="mensagem-erro" class="mensagem-erro"></span>
 
-                <p>Ainda não tem uma conta? <a href="cadastro.html">Crie uma.</a></p>
+                <p><a href="cadastro.html" class="link-cadastro">Cadastrar novo usuário.</a></p>
                 <button id="botao-login" class="btn-login">Login</button>
             </div>
+        </div>
+    </div>
+    <div id="loading" class="modal">
+        <div class="modal-conteudo">
+            <div class="container-dot">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <p>Carregando ...</p>
         </div>
     </div>
 </body>
