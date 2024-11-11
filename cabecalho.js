@@ -7,3 +7,10 @@ document.querySelectorAll(".navbar-links a").forEach((link) => {
         link.classList.remove("ativo");
     }
 });
+
+document.getElementById("logoutButton").addEventListener("click", function () {
+
+    localStorage.removeItem("auth_token");
+
+    window.location.href = "index.html";
+});

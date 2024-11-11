@@ -45,5 +45,5 @@ export function validarToken() {
 }
 
 function redirecionarParaLogin() {
-    window.location.href = "/index.html";
+    window.location.href = "index.html";
 }

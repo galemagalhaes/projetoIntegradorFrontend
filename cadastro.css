@@ -116,6 +116,10 @@ body * {
     box-sizing: border-box;
 }
 
+.senha-container>input::placeholder {
+    color: #f0ffffde;
+}
+
 .senha-container>button {
     background: transparent;
     border: none;

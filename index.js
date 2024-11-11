@@ -1,93 +1,91 @@
-function atualizarDashboard() {
-    document.getElementById('totalClientes').innerText = totalClientes;
-    document.getElementById('totalVendas').innerText = totalVendas;
-    document.getElementById('receitaTotal').innerText = `R$ ${receitaTotal.toFixed(2)}`;
-    document.getElementById('vendasPendentes').innerText = vendasPendentes;
+import { fazerLogin } from "./api.js";
+
+function validarEmail(email) {
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regexEmail.test(email);
 }
 
-function atualizarGrafico(mes, valor) {
-    vendasPorMesDados[mes] += valor;
-    vendasPorMes.update();
+function validarSenha(senha) {
+    return senha.length >= 6 && senha.length <= 8;
 }
 
-document.getElementById('formNovoCliente').addEventListener('submit', function (event) {
-    event.preventDefault();
+function exibirErro(elemento, mensagem) {
+    elemento.textContent = mensagem;
+    elemento.classList.add("visivel");
+}
 
-    const nome = document.getElementById('nomeCliente').value;
-    const email = document.getElementById('emailCliente').value;
-    const telefone = document.getElementById('telefoneCliente').value;
+function esconderErro(elemento) {
+    elemento.textContent = "";
+    elemento.classList.remove("visivel");
+}
 
-    const novaLinha = `<tr>
-                <td>${nome}</td>
-                <td>${email}</td>
-                <td>${telefone}</td>
-                <td>N/A</td>
-                <td>Pendente</td>
-                <td>N/A</td>
-            </tr>`;
+document.getElementById("usuario").addEventListener("blur", () => {
+    const usuario = document.getElementById("usuario");
+    const erroEmail = document.getElementById("erro-email");
 
-    document.getElementById('tabelaClientes').insertAdjacentHTML('beforeend', novaLinha);
-
-    totalClientes++;
-    atualizarDashboard();
-
-    document.getElementById('formNovoCliente').reset();
+    if (!validarEmail(usuario.value)) {
+        exibirErro(erroEmail, "Por favor, insira um e-mail válido.");
+    } else {
+        esconderErro(erroEmail);
+    }
 });
 
-document.getElementById('formNovaVenda').addEventListener('submit', function (event) {
-    event.preventDefault();
+document.getElementById("senha").addEventListener("blur", () => {
+    const senha = document.getElementById("senha");
+    const erroSenha = document.getElementById("erro-senha");
 
-    const cliente = document.getElementById('clienteVenda').value;
-    const data = new Date(document.getElementById('dataVenda').value);
-    const valor = parseFloat(document.getElementById('valorVenda').value);
-
-    const mes = data.getMonth();
-
-    const novaLinhaVenda = `<tr>
-                <td>#${proximoIdVenda}</td> <!-- Usando o ID em ordem crescente -->
-                <td>${cliente}</td>
-                <td>${data.toLocaleDateString('pt-BR')}</td>
-                <td>R$ ${valor.toFixed(2)}</td>
-                <td>Pendente</td>
-            </tr>`;
-
-    document.getElementById('tabelaVendas').insertAdjacentHTML('beforeend', novaLinhaVenda);
-
-    totalVendas++;
-    receitaTotal += valor;
-    vendasPendentes++;
-
-    atualizarDashboard();
-    atualizarGrafico(mes, valor);
-
-    atualizarCliente(cliente, valor, data);
-
-    proximoIdVenda++;
-    document.getElementById('formNovaVenda').reset();
+    if (!validarSenha(senha.value)) {
+        exibirErro(erroSenha, "A senha deve ter entre 6 e 8 caracteres.");
+    } else {
+        esconderErro(erroSenha);
+    }
 });
 
 
-function atualizarCliente(clienteNome, valor, data) {
-    const tabelaClientes = document.getElementById('tabelaClientes');
-    const linhas = tabelaClientes.getElementsByTagName('tr');
-    let clienteEncontrado = false;
+async function validarLogin() {
+    const usuario = document.getElementById("usuario");
+    const senha = document.getElementById("senha");
+    const mensagemErro = document.getElementById("mensagem-erro");
+    const loading = document.getElementById("loading");
 
-    for (let i = 0; i < linhas.length; i++) {
-        const tds = linhas[i].getElementsByTagName('td');
-        if (tds[0].innerText === clienteNome) {
-            tds[3].innerText = data.toLocaleDateString('pt-BR');
-            tds[5].innerText = `R$ ${valor.toFixed(2)}`;
-            clienteEncontrado = true;
-            break;
+
+    esconderErro(mensagemErro);
+
+
+    loading.style.display = "block";
+
+
+    if (!validarEmail(usuario.value)) {
+        exibirErro(mensagemErro, "E-mail inválido.");
+        loading.style.display = "none";
+        return;
+    }
+
+    if (!validarSenha(senha.value)) {
+        exibirErro(mensagemErro, "A senha deve ter entre 6 e 8 caracteres.");
+        loading.style.display = "none";
+        return;
+    }
+
+    const dados = {
+        email: usuario.value,
+        senha: senha.value,
+    };
+
+    try {
+        const data = await fazerLogin(dados);
+
+        if (data.access_token) {
+            localStorage.setItem("auth_token", data.access_token);
+            window.location.href = "dashboard.html";
+        } else {
+            exibirErro(mensagemErro, "Erro: Token não recebido.");
         }
-    }
-
-    if (!clienteEncontrado) {
-        alert('Cliente não encontrado.');
+    } catch (error) {
+        exibirErro(mensagemErro, error.message);
+    } finally {
+        loading.style.display = "none";
     }
 }
 
-document.getElementById('btnLogout').addEventListener('click', function () {
-    alert('Deslogado com sucesso!');
-    window.location.href = 'index.html';
-});
+document.getElementById("botao-login").addEventListener("click", validarLogin);

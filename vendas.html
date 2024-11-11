@@ -2,12 +2,16 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="cabecalho.css" />
-    <link rel="stylesheet" href="scrollbar.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <title>Vendas</title>
     <link rel="shortcut icon" type="imagex/png" href="dash2.png">
+    <link rel="stylesheet" href="scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="cabecalho.css" />
+    <link rel="stylesheet" type="text/css" href="vendas.css" />
+    <link rel="stylesheet" type="text/css" href="loading.css" />
 </head>
 
 <body>
@@ -26,90 +30,137 @@
             </div>
         </nav>
     </header>
-    <main>
-        <h3>Adicionar Nova Venda</h3>
-        <form id="formNovaVenda" class="mb-4">
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="clienteVenda">Cliente</label>
-                    <input type="text" class="form-control" id="clienteVenda" required />
+    <main class="main-dash">
+        <div class="principal">
+            <div class="container mt-5">
+                <h3>Adicionar Nova Venda</h3>
+                <span id="mensagem-erro" class="mensagem-erro"></span>
+                <form id="formNovaVenda" class="mb-4">
+                    <div class="form-row">
+
+                        <div class="form-group col-md-5">
+                            <label for="clienteVenda">Cliente</label>
+                            <select class="seleciona-cliente" id="clienteVendaVendaNova"></select>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="dataVenda">Data da Venda</label>
+                            <input type="date" class="form-control" id="dataVenda" required />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="valorVenda">Valor Total</label>
+                            <input type="number" class="form-control" id="valorVenda" required />
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">Adicionar Venda</button>
+                </form>
+
+                <h3 class="mt-4">Buscar vendas</h3>
+                <div class="search-container">
+                    <input type="text" id="campoBusca" placeholder="Buscar por cliente..." class="form-control" />
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="dataVenda">Data da Venda</label>
-                    <input type="date" class="form-control" id="dataVenda" required />
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="valorVenda">Valor Total</label>
-                    <input type="number" class="form-control" id="valorVenda" required />
+
+                <h3 class="mt-4">Tabela de Vendas</h3>
+                <div class="table-container">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Data da Venda</th>
+                                <th>Valor Total</th>
+                                <th>Status da Venda</th>
+                                <th>Atualizar Venda</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaVendas"></tbody>
+                    </table>
                 </div>
             </div>
-            <button type="submit" class="btn">Adicionar Venda</button>
-        </form>
-
-        <h3 class="mt-4">Tabela de Clientes</h3>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Nome do Cliente</th>
-                    <th>Email</th>
-                    <th>Telefone</th>
-                    <th>Última Compra</th>
-                    <th>Status da Venda</th>
-                    <th>Valor da Última Compra</th>
-                </tr>
-            </thead>
-            <tbody id="tabelaClientes">
-                <tr>
-                    <td>Maria Silva</td>
-                    <td>maria@example.com</td>
-                    <td>(11) 98765-4321</td>
-                    <td>01/09/2024</td>
-                    <td>Pendente</td>
-                    <td>R$ 200</td>
-                </tr>
-                <tr>
-                    <td>João Souza</td>
-                    <td>joao@example.com</td>
-                    <td>(11) 91234-5678</td>
-                    <td>28/08/2024</td>
-                    <td>Concluída</td>
-                    <td>R$ 500</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h3 class="mt-4">Tabela de Vendas</h3>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID da Venda</th>
-                    <th>Cliente</th>
-                    <th>Data da Venda</th>
-                    <th>Valor Total</th>
-                    <th>Status da Venda</th>
-                </tr>
-            </thead>
-            <tbody id="tabelaVendas">
-                <tr>
-                    <td>#001</td>
-                    <td>Maria Silva</td>
-                    <td>01/09/2024</td>
-                    <td>R$ 200</td>
-                    <td>Pendente</td>
-                </tr>
-                <tr>
-                    <td>#002</td>
-                    <td>João Souza</td>
-                    <td>28/08/2024</td>
-                    <td>R$ 500</td>
-                    <td>Concluída</td>
-                </tr>
-            </tbody>
-        </table>
         </div>
-        <div class="text-center mt-4">
-    </main>
+        <div id="loading" class="modal">
+            <div class="modal-conteudo">
+                <div class="container-dot">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <p>Carregando ...</p>
+            </div>
+        </div>
+        <div id="modal-formulario" class="modal-formulario">
+            <div class="formulario-conteudo">
+                <h3 id="modalTitle" class="mt-4">Atualizar Vendas</h3>
+                <span id="mensagem-erro" class="mensagem-erro"></span>
+                <form id="formAtualizarVenda" class="formulario">
+                    <div class="form-row mb-4">
+                        <div class="col-md-2">
+                            <label for="clienteVendaAtualizacao">Cliente</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="clienteVendaAtualizacao" disabled required />
+                            <span id="errodataVendaAtualizacao" class="mensagem-erro"></span>
+                        </div>
+                    </div>
 
+                    <div class="form-row mb-4">
+                        <div class="col-md-2">
+                            <label for="dataVendaAtualizacao">Data da Venda</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="date" class="form-control" id="dataVendaAtualizacao" required />
+                            <span id="errodataVendaAtualizacao" class="mensagem-erro"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row mb-4">
+                        <div class="col-md-2">
+                            <label for="valorVendaAtualizacao">Valor Total</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="number" class="form-control" id="valorVendaAtualizacao" step="0.01" required />
+                            <span id="errovalorVendaAtualizacao" class="mensagem-erro"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row mb-4">
+                        <div class="col-md-2">
+                            <label for="statusVendaAtualiza">Pendente:</label>
+                        </div>
+                        <div class="col-md-9" id="container-radio">
+                            <div class="form-check form-check-inline mr-3">
+                                <input type="radio" class="form-check-input" name="statusVendaAtualiza"
+                                    id="statusVendaPendenteSim" value="sim" required />
+                                <label class="form-check-label" for="statusVendaPendenteSim">Sim</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="form-check-input" name="statusVendaAtualiza"
+                                    id="statusVendaPendenteNao" value="nao" required />
+                                <label class="form-check-label" for="statusVendaPendenteNao">Não</label>
+                            </div>
+                            <span id="erroStatusVendaAtualiza" class="mensagem-erro"></span>
+                        </div>
+                    </div>
+
+                    <div class="container-botoes">
+                        <button type="button" id="fechar-modal" class="btn-cancelar">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="btn-confirmar">Confirmar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
 </body>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="module" src="vendas.js"></script>
+<script type="module" src="auth.js"></script>
+<script src="cabecalho.js"></script>
+<script src="config.js"></script>
 
 </html>
