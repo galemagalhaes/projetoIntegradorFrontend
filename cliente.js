@@ -367,6 +367,7 @@ async function validarFormulario() {
             const clientes = await obterClientes();
             preencherTabelaClientes(clientes);
             configurarBusca(clientes);
+            fecharModal()
         } else {
             exibirErro(mensagemErro, data.message || "Erro ao cadastrar.");
         }
